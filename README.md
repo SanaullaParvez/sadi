@@ -35,7 +35,12 @@ In your `constants/header.php` file, include the root directory as the BASE_URL 
 ```javascript
 define("BASE_URL", "http://localhost/sadi/");
 ```
-__Configure Database access__
+### Configure Database 
+__Import database__
+
+* First create a database and import a demo database from `assets/database/sadi.sql` file.
+
+__Modify database access__
 
 In your `constants/mysql.php` file, include all of the following values.
 
