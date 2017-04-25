@@ -1,4 +1,4 @@
-## An appliicatoin for managing a business transactions
+## An applicatoin for managing a business transactions
 This module is an effort to implement an appliication to manage a little business transactions. To implemnt I have used Material Design data tables in Angular Material. Data tables are used to present raw data sets and usually appear in desktop enterprise applications.
 
 ### Demo
