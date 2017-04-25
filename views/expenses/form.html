@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <form name="expense.form" class="form-horizontal" ng-submit="addExpense()" novalidate="novalidate">
+        <div class="form-group">
+            <div class="alert alert-danger text-center" ng-show="has_error">
+                <h3>There was a problem registering, please try again later!</h3>
+            </div>
+        </div>
+        <flash-message duration="5000"></flash-message>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="transaction_data">{{'date' | translate}}</label>
+
+                    <input type="date"
+                           class="form-control"
+                           ng-model="formModel.transaction_data"
+                           id="transaction_data"
+                           value={{today}}>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="receipt_no">{{'receipt_no' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.receipt_no"
+                           id="receipt_no"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="sector_id">{{'EXPENSE_SECTOR' | translate}}</label>
+
+                    <select id="sector_id"
+                            class="form-control"
+                            ng-model="formModel.sector_id"
+                            required="required">
+                        <option value="">{{'SELECT_EXPENSE_SECTOR' | translate}}</option>
+                        <option ng-repeat="expense_sector in expense_sectors.records" value="{{expense_sector.id}}">{{expense_sector.name}}</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="buyer_id">{{'name' | translate}}</label>
+
+                    <select id="buyer_id"
+                            class="form-control"
+                            ng-model="formModel.buyer_id">
+                        <option value="">{{'SELECT_BUYER' | translate}}</option>
+                        <option ng-repeat="buyer in buyers.records" value="{{buyer.account_no}}">{{buyer.name}}</option>
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="cash">{{'amount' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.cash"
+                           id="cash"
+                           required="required"
+                           min="50">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Registering</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </div>
+    </form>
+    <!--<pre>{{ formModel | json }}</pre>-->
+</div>

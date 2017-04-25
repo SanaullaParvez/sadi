@@ -1,0 +1,37 @@
+{
+  "name": "angular_awesome",
+  "homepage": "https://github.com/SanaullaParvez/angular_awesome",
+  "authors": [
+    "Sanaulla Parvez <sanaulla.parvez@rootnext.com>"
+  ],
+  "description": "Madrasa Management System",
+  "main": "index.php",
+  "moduleType": [],
+  "keywords": [
+    "MMS"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-auto-validate": "~1.16.22",
+    "angular-ui-router": "~0.2.18",
+    "angular-ladda": "~0.2.2",
+    "angular-resource": "~1.5.0",
+    "bootstrap": "~3.3.2",
+    "underscore": "~1.8.3",
+    "angular-translate": "~2.9.1",
+    "angular-material-data-table": "~0.9.11",
+    "angular-flash-alert": "~2.2.4"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "oclazyload": "~1.0.9"
+  }
+}

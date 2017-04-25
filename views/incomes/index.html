@@ -1,0 +1,85 @@
+<md-content layout="column" flex>
+
+    <md-card>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+            <div class="md-toolbar-tools">
+                <h2 class="md-title">{{ 'INCOMES' | translate }}</h2>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-click="filter.show = true">
+                    <md-icon>filter_list</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="addItem($event)">
+                    <md-icon>local_dining</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+            <div class="md-toolbar-tools">
+                <md-icon>search</md-icon>
+                <form flex name="filter.form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="query.filter" ng-model-options="filter.options" placeholder="search">
+                    </div>
+                </form>
+                <md-button class="md-icon-button" ng-click="removeFilter()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+            <div class="md-toolbar-tools" layout-align="space-between">
+                <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
+                <md-button class="md-icon-button" ng-click="delete($event)">
+                    <md-icon>delete</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="onReorder">
+                <tr md-row>
+                    <th md-column ><span>{{'receipt_no' | translate}}</span></th>
+                    <th md-column md-numeric><span>{{'date' | translate}}</span></th>
+                    <th md-column md-numeric>{{'SELLER' | translate}}</th>
+                    <th md-column md-numeric>{{'amount' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row ng-repeat="dessert in incomes.records">
+                    <td md-cell>{{dessert.receipt_no}}</td>
+                    <td md-cell>{{dessert.transaction_data |  date:'d MMM,yy' }}</td>
+                    <td md-cell>{{dessert.seller_name}}</td>
+                    <!-- <td md-cell>{{dessert.start_date |  date:'MM' | translateToBengali }}</td> -->
+                    <td md-cell>{{dessert.cash | number: 2}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{incomes.count}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
+    </md-card>
+
+</md-content>
+
+
+
+<!--<h2 class="sub-header">{{ 'DONOR' | translate }}</h2>-->
+<!--<div class="table-responsive">-->
+    <!--<table class="table table-striped">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th data-ng-repeat="key in donor_key">{{key}}</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr data-ng-repeat="donor in donors">-->
+            <!--<td data-ng-repeat="val in donor">{{val}}</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+<!--</div>-->

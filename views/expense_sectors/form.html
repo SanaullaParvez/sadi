@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <form name="expense_sector.form" class="form-horizontal" ng-submit="addExpenseSector()" novalidate="novalidate">
+        <div class="form-group">
+            <div class="alert alert-danger text-center" ng-show="has_error">
+                <h3>There was a problem registering, please try again later!</h3>
+            </div>
+        </div>
+        <flash-message duration="5000"></flash-message>
+        <div class="row">
+            <div class="col-md-12 vertical-line">
+                <div class="form-group">
+                    <label for="name">{{'name' | translate}}</label>
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.name"
+                           id="name"
+                           required="required">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Registering</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </div>
+    </form>
+    <!--<pre>{{ formModel | json }}</pre>-->
+</div>

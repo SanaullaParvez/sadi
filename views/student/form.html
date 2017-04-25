@@ -1,0 +1,183 @@
+<div class="container-fluid">
+    <form name="student.form" class="form-horizontal" ng-submit="addStudent()" novalidate="novalidate">
+        <div class="form-group">
+            <div class="alert alert-danger text-center" ng-show="has_error">
+                <h3>There was a problem registering, please try again later!</h3>
+            </div>
+        </div>
+        <flash-message duration="5000"></flash-message>
+        <div class="row">
+            <div class="col-md-6 vertical-line">
+                <div class="form-group">
+                    <label for="admission_no">{{'admission_no' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.admission_no"
+                           id="admission_no"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="admission_date">{{'admission_date' | translate}}</label>
+
+                    <input type="date"
+                           class="form-control"
+                           ng-model="formModel.admission_date"
+                           id="admission_date"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="name">{{'student_name' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.name"
+                           id="name"
+                           required="required">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="age">{{'age' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.age"
+                           min="3"
+                           max="64"
+                           id="age"
+                           required="required">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="father_name">{{'father_name' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.father_name"
+                           id="father_name">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="guardian_name">{{'guardian_name' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.guardian_name"
+                           id="guardian_name">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="relation">{{'relation' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.relation"
+                           id="relation">
+
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="contact_no">{{'contact_no' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.contact_no"
+                           id="contact_no">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="class_name">{{'class_name' | translate}}</label>
+
+                    <select id="class_name"
+                            class="form-control"
+                            ng-model="formModel.class_name"
+                            required="required">
+                        <option value="">Please Choose</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="rental_bill">{{'rental_bill' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.rental_bill"
+                           id="rental_bill"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="monthly_fees">{{'monthly_fees' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.monthly_fees"
+                           id="monthly_fees"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="book_bill">{{'book_bill' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.book_bill"
+                           id="book_bill"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="cash">{{'cash' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.cash"
+                           id="cash"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="arrears">{{'arrears' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.arrears"
+                           id="arrears"
+                           required="required">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Registering</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </div>
+    </form>
+    <!--<pre>{{ formModel | json }}</pre>-->
+</div>

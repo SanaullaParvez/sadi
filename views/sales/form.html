@@ -1,0 +1,147 @@
+<div class="container-fluid">
+    <form name="sale.form" class="form-horizontal" ng-submit="addSale()" novalidate="novalidate">
+        <div class="form-group">
+            <div class="alert alert-danger text-center" ng-show="has_error">
+                <h3>There was a problem registering, please try again later!</h3>
+            </div>
+        </div>
+        <flash-message duration="5000"></flash-message>
+        <div class="row">
+            <div class="col-md-6 vertical-line">
+                <div class="form-group">
+                    <label for="transaction_data">{{'date' | translate}}</label>
+
+                    <input type="date"
+                           class="form-control"
+                           ng-model="formModel.transaction_data"
+                           id="transaction_data"
+                           value={{today}}>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="receipt_no">{{'receipt_no' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.receipt_no"
+                           id="receipt_no"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="buyer_id">{{'name' | translate}}</label>
+
+                    <select id="buyer_id"
+                            class="form-control"
+                            ng-model="formModel.buyer_id"
+                            required="required">
+                        <option value="">{{'SELECT_BUYER' | translate}}</option>
+                        <option ng-repeat="buyer in buyers.records" value="{{buyer.account_no}}">{{buyer.name}}</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="stone_id">{{'stone_name' | translate}}</label>
+
+                    <select id="stone_id"
+                            class="form-control"
+                            required="required"
+                            ng-model="formModel.stone_id">
+                            <option value="">{{'SELECT_STONE' | translate}}</option>
+                        <option ng-repeat="stone in stones.records" value="{{stone.id}}">{{stone.name}}</option>
+                    </select>
+
+                </div>
+
+
+
+            </div>
+            <div class="col-md-5">
+                            <div class="form-group">
+                    <label for="quantity">{{'quantity' | translate}}(CFT)</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.quantity"
+                           min="1"
+                           id="quantity"
+                           required="required">
+
+                </div>
+                <div class="form-group">
+                    <label for="rate">{{'rate' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.rate"
+                           min="1"
+                           id="rate"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">{{'mullo' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           value = {{formModel.quantity*formModel.rate}}
+                           ng-model="formModel.amount"
+                           id="amount"
+                           readonly>
+
+                </div>               
+
+                <div class="form-group">
+                    <label for="details">{{'description' | translate}}</label>
+
+                    <select id="details"
+                            class="form-control"
+                            ng-model="formModel.details"
+                            required="required">
+                        <option value="">{{'SELECT_DETAIL' | translate}}</option>
+                        <option value="1" selected>{{'NOGOD' | translate}}</option>
+                        <option value="2">{{'CHECK' | translate}}</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label for="cash">{{'porisod' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           ng-model="formModel.cash"
+                           id="cash"
+                           required="required">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="arrears">{{'paona_taka' | translate}}</label>
+
+                    <input type="number"
+                           class="form-control"
+                           value = {{formModel.quantity*formModel.rate-formModel.cash}}
+                           ng-model="formModel.arrears"
+                           min="1"
+                           id="arrears"
+                           readonly>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Registering</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </div>
+    </form>
+    <!-- <pre>{{ stones.records }}</pre> -->
+</div>

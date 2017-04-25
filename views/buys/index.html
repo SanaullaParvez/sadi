@@ -1,0 +1,100 @@
+<md-content layout="column" flex>
+
+    <md-card>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+            <div class="md-toolbar-tools">
+                <h2 class="md-title">{{ 'BUY' | translate }}</h2>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-click="filter.show = true">
+                    <md-icon>filter_list</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="addItem($event)">
+                    <md-icon>local_dining</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+            <div class="md-toolbar-tools">
+                <md-icon>search</md-icon>
+                <form flex name="filter.form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="query.filter" ng-model-options="filter.options" placeholder="search">
+                    </div>
+                </form>
+                <md-button class="md-icon-button" ng-click="removeFilter()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+            <div class="md-toolbar-tools" layout-align="space-between">
+                <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
+                <md-button class="md-icon-button" ng-click="delete($event)">
+                    <md-icon>delete</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="onReorder">
+                <tr md-row>
+                    <th md-column ><span>{{'date' | translate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></th>
+                    <th md-column md-numeric ><span>{{'receipt_no' | translate}}</span></th>
+                    <th md-column md-numeric>{{'SELLER' | translate}}</th>
+                    <th md-column md-numeric>{{'VOLDER' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VOLDER' | translate}}</th>
+                    <th md-column md-numeric>{{'VUTU' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VUTU' | translate}}</th>
+                    <th md-column md-numeric>{{'VOLDER34' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VOLDER34' | translate}}</th>
+                    <th md-column md-numeric>{{'VOLDER12' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VOLDER12' | translate}}</th>
+                    <th md-column md-numeric>{{'VOLDER510' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VOLDER510' | translate}}</th>
+                    <th md-column md-numeric>{{'VUTU34' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VUTU34' | translate}}</th>
+                    <th md-column md-numeric>{{'VUTU12' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VUTU12' | translate}}</th>
+                    <th md-column md-numeric>{{'VUTU510' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'VUTU510' | translate}}</th><th md-column md-numeric>{{'SINGEL' | translate}}</th>
+                    <th md-column md-numeric>{{'total' | translate}}{{'SINGEL' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row ng-repeat="buy in buys">
+                    <td md-cell>{{buy.transaction_data |  date:'d MMM,yy' }}</td>
+                    <td md-cell>{{buy.receipt_no}}</td>
+                    <td md-cell>{{buy.seller_name}}</td>
+                    <td md-cell>{{buy.volder}}</td>
+                    <td md-cell><b>{{buy.total_volder | number: 2}}</b></td>
+                    <td md-cell>{{buy.vutu}}</td>
+                    <td md-cell><b>{{buy.total_vutu | number: 2}}</b></td>
+                    <td md-cell>{{buy.volder34 | number: 2}}</td>
+                    <td md-cell><b>{{buy.total_volder34 | number: 2}}</b></td>
+                    <td md-cell>{{buy.volder12 | number: 2}}</td>
+                    <td md-cell><b>{{buy.total_volder12 | number: 2}}</b></td>
+                    <td md-cell>{{buy.volder510 | number: 2}}</td>
+                    <td md-cell><b>{{buy.total_volder510 | number: 2}}</b></td>
+                    <td md-cell>{{buy.vutu34 | number: 2}}</td>
+                    <td md-cell><b>{{buy.total_vutu34 | number: 2}}</b></td>
+                    <td md-cell>{{buy.vutu12 | number: 2}}</td>
+                    <td md-cell><b>{{buy.total_vutu12 | number: 2}}</b></td>
+                    <td md-cell>{{buy.vutu510 | number: 2}}</td>
+                    <td md-cell><b>{{buy.total_vutu510 | number: 2}}</b></td>
+                    <td md-cell>{{buy.singel}}</td>
+                    <td md-cell><b>{{buy.total_singel | number: 2}}</b></td>
+                    <!-- <td md-cell>{{dessert.start_date |  date:'MM' | translateToBengali }}</td> -->
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{buys_count}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
+    </md-card>
+
+</md-content>

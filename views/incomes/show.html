@@ -1,0 +1,24 @@
+
+<h2 class="sub-header">{{ 'SELLER' | translate }}: {{name}}</h2>
+<h4 class="sub-header">{{ 'account_no' | translate }}: {{account_no}}</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><span>{{'date' | translate}}</span></th>
+            <th>{{'mullo' | translate}}</th>
+            <th>{{'peaeci' | translate}}</th>
+            <th>{{'baki_paona' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr data-ng-repeat="sale in income" >
+            <td>{{sale.transaction_data}}</td>
+            <td>{{sale.amount}}</td>
+            <td>{{sale.cash}}</td>
+            <td>{{sale.due}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
