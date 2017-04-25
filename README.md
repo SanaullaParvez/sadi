@@ -24,7 +24,10 @@ Bower is a dependency management tools or a package manager.Bower js is used for
 bower install
 ```
 If the following question arrive: `Unable to find a suitable version for angular, please choose one by typing one of the numbers below:`
-Then Press: `2`
+
+Then Press: `2`.
+
+The angular version should be : `1.5.11 or 1.5.8`
 
 __Change BASE_URL__
 
