@@ -19,7 +19,7 @@ Download the Project and put it to the `www` directory
 ```
 __Using Bower__
 
-Bower is a dependency management tools or a package manager.Bower js is used for managing front end components like html, css, js etc. Run the following command ...
+Bower is a dependency management tools or a package manager.Bower js is used for managing front end components like html, css, js etc. Go to the Project directory and run the following command ...
 ```
 bower install
 ```
@@ -65,7 +65,7 @@ If you want you can use Gulp to interact with the files on your server through F
 
 __Using npm__
 
-Npm is also a dependency management tools. Npm is used for installing Node js modules .Run the following command ...
+Npm is also a dependency management tools. Npm is used for installing Node js modules .Run the following command on the project directory...
 ```
 npm install
 ```
