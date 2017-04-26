@@ -1,10 +1,10 @@
 {
-  "name": "angular_awesome",
-  "homepage": "https://github.com/SanaullaParvez/angular_awesome",
+  "name": "sadi",
+  "homepage": "https://github.com/SanaullaParvez/sadi",
   "authors": [
     "Sanaulla Parvez <sanaulla.parvez@rootnext.com>"
   ],
-  "description": "Madrasa Management System",
+  "description": "Sadi Stome Crusher",
   "main": "index.php",
   "moduleType": [],
   "keywords": [

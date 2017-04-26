@@ -1,21 +1,21 @@
 {
-  "name": "angular_awesome",
+  "name": "sadi",
   "version": "1.0.0",
-  "description": "Jamia Karimia Khalpar Madrasa",
+  "description": "Sadi Stome Crusher",
   "main": "index.php",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SanaullaParvez/angular_awesome.git"
+    "url": "git+https://github.com/SanaullaParvez/sadi.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SanaullaParvez/angular_awesome/issues"
+    "url": "https://github.com/SanaullaParvez/sadi/issues"
   },
-  "homepage": "https://github.com/SanaullaParvez/angular_awesome#readme",
+  "homepage": "https://github.com/SanaullaParvez/sadi#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-util": "~3.0.7",

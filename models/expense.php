@@ -5,7 +5,7 @@ if ($method == 'GET'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
     if(!empty($_GET['id'])){
         $id = !empty($_GET['id'])? $_GET['id'] : '';
-        $sql = "SELECT * FROM $table_name WHERE buyer_id=$id";
+        $sql = "SELECT * FROM $table_name WHERE buyer_id=$id ORDER BY id";
 
         $result = $mysqli->query($sql);
         if ($result) {
