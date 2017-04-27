@@ -5,8 +5,18 @@ if ($method == 'GET'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
     if(!empty($_GET['id'])){
             $id = !empty($_GET['id'])? $_GET['id'] : '';
-            $sql = "SELECT * FROM $table_name WHERE seller_id=$id ORDER BY id";
-
+            //$sql = "SELECT * FROM $table_name WHERE seller_id=$id ORDER BY id";
+            $sql = "
+                    SELECT ic.transaction_data AS transaction_data,0 AS amount,ic.cash 
+                    from incomes AS ic where ic.seller_id = $id
+                    UNION
+                    (
+                    select bu.transaction_data AS transaction_data,bu.amount AS amount,bu.cash 
+                    from buys AS bu 
+                    where bu.seller_id = $id 
+                    ) 
+                    ORDER BY transaction_data;
+            ";
             $result = $mysqli->query($sql);
             if ($result) {
                 $output = ["records"=>[]];
@@ -35,7 +45,20 @@ if ($method == 'GET'){
         }
         $filter = !empty($_GET['filter'])? $_GET['filter'].'%' : '%';
 
-        $sql = "SELECT incomes.id AS id,receipt_no,transaction_data,sellers.name AS seller_name, amount, cash FROM ($table_name) INNER JOIN sellers ON sellers.account_no = incomes.seller_id WHERE transaction_data LIKE '$filter' ORDER BY $order DESC LIMIT $page, $limit";
+        // $sql = "SELECT incomes.id AS id,receipt_no,transaction_data,sellers.name AS seller_name, amount, cash FROM ($table_name) INNER JOIN sellers ON sellers.account_no = incomes.seller_id WHERE transaction_data LIKE '$filter' ORDER BY $order DESC LIMIT $page, $limit";
+        $sql = "SELECT ic.receipt_no,ic.transaction_data,sellers.name AS seller_name,ic.cash 
+            from incomes ic 
+            inner join sellers on sellers.id = ic.seller_id 
+            WHERE transaction_data LIKE '$filter'
+            union 
+            (
+                SELECT bu.receipt_no,bu.transaction_data,sellers.name AS seller_name,bu.cash 
+                from buys bu
+                inner join sellers on sellers.id = bu.seller_id
+                WHERE transaction_data LIKE '$filter'
+            ) ORDER BY $order DESC LIMIT $page, $limit;
+        ";
+
         $result = $mysqli->query($sql);
         if ($result) {
             // $output = ["records"=>[],"count"=>$num_rows];

@@ -37,6 +37,7 @@ if ($method == 'GET'){
     }
     $filter = !empty($_GET['filter'])? $_GET['filter'].'%' : '%';
 
+/*
     $sql = "SELECT `transaction_data`, sector_id, 
     SUM(IF(sector_id = 1, cash,0)) AS stone, 
     SUM(IF(sector_id = 2, cash,0)) AS tomtom, 
@@ -51,6 +52,30 @@ if ($method == 'GET'){
     SUM(IF(sector_id = 11, cash,0)) AS rent, 
     SUM(IF(sector_id = 12, cash,0)) AS others, 
     SUM(cash) AS total FROM `expenses` WHERE transaction_data LIKE '$filter' GROUP BY transaction_data ORDER BY $order DESC LIMIT $page, $limit";
+*/
+    $sql = "
+            SELECT transaction_data, sector_id,  
+                SUM(IF(sector_id = 1, cash,0)) AS stone,
+                SUM(IF(sector_id = 2, cash,0)) AS tomtom, 
+                SUM(IF(sector_id = 3, cash,0)) AS mistri,
+                SUM(IF(sector_id = 4, cash,0)) AS manager, 
+                SUM(IF(sector_id = 5, cash,0)) AS malik, 
+                SUM(IF(sector_id = 6, cash,0)) AS office, 
+                SUM(IF(sector_id = 7, cash,0)) AS eating,
+                SUM(IF(sector_id = 8, cash,0)) AS guest, 
+                SUM(IF(sector_id = 9, cash,0)) AS dan, 
+                SUM(IF(sector_id = 10, cash,0)) AS lebar, 
+                SUM(IF(sector_id = 11, cash,0)) AS rent, 
+                SUM(IF(sector_id = 12, cash,0)) AS others, 
+                SUM(cash) AS total from
+            (
+            SELECT ex.transaction_data, ex.sector_id as sector_id, ex.cash FROM `expenses_test` ex
+            union
+            SELECT sl.transaction_data, 1 as sector_id, sl.cash FROM sales sl
+            ) t
+            WHERE transaction_data LIKE '$filter' 
+            GROUP BY transaction_data ORDER BY $order DESC LIMIT $page, $limit
+    ";
     $result = $mysqli->query($sql);
     if ($result) {
         // $output = ["records"=>[],"count"=>$num_rows];

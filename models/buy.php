@@ -63,12 +63,12 @@ if ($method == 'GET'){
 
     $sql = "INSERT INTO buys (`transaction_data`, `receipt_no`, `seller_id`, `stone_id`, `quantity`, `rate`, `amount`, `details`, `cash`, `due`)
             VALUES ('{$transaction_data}', '{$receipt_no}', $seller_id, $stone_id, $quantity, $rate, $amount, '{$details}', $cash, $due)";
-    $sql1 = "INSERT INTO incomes (`transaction_data`,`receipt_no`, `seller_id`, `cash`, `amount`)
-            VALUES ('{$transaction_data}', $receipt_no, $seller_id, $cash, $amount)";
+    //$sql1 = "INSERT INTO incomes (`transaction_data`,`receipt_no`, `seller_id`, `cash`, `amount`)
+    //        VALUES ('{$transaction_data}', $receipt_no, $seller_id, $cash, $amount)";
 
-    if ($mysqli->query($sql) === TRUE AND $mysqli->query($sql1) === TRUE) {
+    // if ($mysqli->query($sql) === TRUE AND $mysqli->query($sql1) === TRUE) {
+    if ($mysqli->query($sql) === TRUE) {
         return true;
-//    return true;
     } else {
         echo "Error: " . $sql . "<br>" . $sql1 . "<br>" . $mysqli->error;
     }
