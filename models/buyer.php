@@ -50,10 +50,20 @@ if ($method == 'GET'){
     {
         return $intLat = !empty($_POST[$var]) ? $_POST[$var] : "NULL";
     }
+    $id = post("id");
     $name = post("name");
     $account_no = post("account_no");
-    $sql = "INSERT INTO buyers (`account_no`, `name`)
+    if(!empty($id)){
+        // $id = !empty($_GET['id'])? $_GET['id'] : '';
+        $sql = "UPDATE buyers SET `name`='{$name}'
+            WHERE `account_no`='{$account_no}'";
+    }
+    else
+    {
+        $sql = "INSERT INTO buyers (`account_no`, `name`)
             VALUES ('{$account_no}', '{$name}')";
+    }
+    
 
     if ($mysqli->query($sql) === TRUE) {
         return true;
@@ -61,6 +71,8 @@ if ($method == 'GET'){
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
+}else{
+    return $method;
 }
 
 $mysqli->close();

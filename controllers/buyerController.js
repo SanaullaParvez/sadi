@@ -39,6 +39,55 @@ MadrasaApp.controller('addBuyerController', ['$nutrition', '$scope','Flash', fun
         };
 
     }])
+    .controller('editBuyerController', ['$authorize', 'buyer', '$mdDialog', '$nutrition', '$scope', '$q', function ($authorize, buyer, $mdDialog, $nutrition, $scope, $q) {
+        'use strict';
+
+        this.cancel = $mdDialog.cancel;
+
+        $scope.formModel = {id: buyer.id, name: buyer.name, account_no : buyer.account_no};
+        $scope.submitting = false;
+        $scope.submitted = false;
+        $scope.has_error = false;
+    
+        function editDessert(dessert, index) {
+            var deferred = $nutrition.buyer.save($scope.formModel);
+
+            deferred.$promise.then(function () {
+                buyers.splice(index, 1);
+            });
+
+            return deferred.$promise;
+        }
+
+        function error() {
+            console.log(":(");
+            console.log(dessert);
+            $scope.submitting = false;
+            $scope.submitted = false;
+            $scope.has_error = true;
+        }
+
+        function success() {
+            $scope.formModel = {};
+            $scope.buyer.form.$setPristine();
+            console.log(":)");
+            $scope.submitting = false;
+            $scope.submitted = true;
+            $scope.has_error = false;
+            $mdDialog.hide();
+        }
+
+        $scope.editBuyer = function () {
+            $scope.submitting = true;
+            console.log("Hey i'm updated!");
+            console.log($scope.formModel);
+            $scope.buyer.form.$setSubmitted();
+            if ($scope.buyer.form.$valid) {
+                $nutrition.buyer.save($scope.formModel, success, error);
+            }
+        };
+
+    }])
     .controller('deleteBuyerController', ['$authorize', 'buyers', '$mdDialog', '$nutrition', '$scope', '$q', function ($authorize, buyers, $mdDialog, $nutrition, $scope, $q) {
         'use strict';
 
@@ -107,7 +156,20 @@ MadrasaApp.controller('addBuyerController', ['$nutrition', '$scope','Flash', fun
                 controllerAs: 'ctrl',
                 focusOnOpen: false,
                 targetEvent: event,
-                templateUrl: 'views/buyer/form.html'
+                templateUrl: 'views/buyers/form.html'
+            }).then(getBuyers);
+        };
+
+        $scope.editBuyer = function (event, buyer) {
+          // if auto select is enabled you will want to stop the event from propagating
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                controller: 'editBuyerController',
+                controllerAs: 'ctrl',
+                focusOnOpen: false,
+                targetEvent: event,
+                locals: {buyer: buyer},
+                templateUrl: 'views/buyers/edit.html'
             }).then(getBuyers);
         };
 

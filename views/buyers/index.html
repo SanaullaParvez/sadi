@@ -9,9 +9,9 @@
                 <md-button class="md-icon-button" ng-click="filter.show = true">
                     <md-icon>filter_list</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="addItem($event)">
+                <!-- <md-button class="md-icon-button" ng-click="addItem($event)">
                     <md-icon>local_dining</md-icon>
-                </md-button>
+                </md-button> -->
             </div>
         </md-toolbar>
 
@@ -49,11 +49,13 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row ng-repeat="dessert in buyers.records">
-                    <td md-cell>{{dessert.account_no}}</td>
+                <tr md-row md-select="dessert" ng-repeat="dessert in buyers.records">
+                    <td md-cell editable-field="textInput">{{dessert.account_no}}</td>
                     <td md-cell><a ui-sref= "expense({ id: dessert.account_no,name: dessert.name })" >{{dessert.name}}</a></td>
                     <td md-cell></td>
-                    <td md-cell></td>
+                    <td md-cell ng-click="editBuyer($event, dessert)">
+                        <md-icon>edit</md-icon>
+                    </td>
                     <!-- <td md-cell>{{dessert.date_of_exchange |  date:'dd MMM,yy'}}</td> -->
                 </tr>
                 </tbody>
