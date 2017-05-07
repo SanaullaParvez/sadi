@@ -34,13 +34,14 @@ if ($method == 'GET'){
     }    
 }elseif($method == 'DELETE'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
-    $id = !empty($_GET['id'])? $_GET['id'] : '';
-    $sql = "DELETE FROM $table_name WHERE id=$id";
+    // $id = !empty($_GET['id'])? $_GET['id'] : '';
+    $receipt_no = !empty($_GET['receipt_no'])? $_GET['receipt_no'] : '';
+    $sql = "DELETE FROM $table_name WHERE receipt_no='$receipt_no'";
 
     if ($mysqli->query($sql) === TRUE) {
         echo "true";
     } else {
-        echo "Error deleting record: " . $mysqli->error;
+        echo "Error deleting record: " . $sql . $mysqli->error;
     }
 }elseif($method === 'POST'){
     // if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)){
@@ -63,15 +64,14 @@ if ($method == 'GET'){
 
     $sql = "INSERT INTO sales (`transaction_data`, `receipt_no`, `buyer_id`, `stone_id`, `quantity`, `rate`, `amount`, `details`, `cash`, `arrears`)
             VALUES ('{$transaction_data}', '{$receipt_no}', $buyer_id, $stone_id, $quantity, $rate, $amount, '{$details}', $cash, $arrears)";
-    $sql1 = "INSERT INTO expenses (`transaction_data`, `receipt_no`, `sector_id`, `buyer_id`, `amount`, `cash`)
-            VALUES ('{$transaction_data}', $receipt_no, 1, $buyer_id, $amount, $cash)";
+//    $sql1 = "INSERT INTO expenses (`transaction_data`, `receipt_no`, `sector_id`, //`buyer_id`, `amount`, `cash`)
+//            VALUES ('{$transaction_data}', $receipt_no, 1, $buyer_id, $amount, $cash)";
 
 
-    if ($mysqli->query($sql) === TRUE AND $mysqli->query($sql1) === TRUE) {
+    if ($mysqli->query($sql) === TRUE) {
         return true;
-//    return true;
     } else {
-        echo "Error: " . $sql . "<br>" . $sql1 . "<br>" . $mysqli->error;
+        echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
 }
 

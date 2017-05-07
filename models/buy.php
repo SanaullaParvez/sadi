@@ -34,8 +34,8 @@ if ($method == 'GET'){
     }
 }elseif($method == 'DELETE'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
-    $id = !empty($_GET['id'])? $_GET['id'] : '';
-    $sql = "DELETE FROM $table_name WHERE id=$id";
+    $receipt_no = !empty($_GET['receipt_no'])? $_GET['receipt_no'] : '';
+    $sql = "DELETE FROM $table_name WHERE receipt_no='$receipt_no'";
 
     if ($mysqli->query($sql) === TRUE) {
         echo "true";

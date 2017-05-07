@@ -54,16 +54,17 @@ MadrasaApp.controller('addBuyController', ['$nutrition', '$scope', 'Flash', func
         };
 
     }])
-    .controller('deleteBuyController', ['$authorize', 'sellers', '$mdDialog', '$nutrition', '$scope', '$q', function ($authorize, sellers, $mdDialog, $nutrition, $scope, $q) {
+    .controller('deleteBuyController', ['$authorize', 'buys', '$mdDialog', '$nutrition', '$scope', '$q', function ($authorize, buys, $mdDialog, $nutrition, $scope, $q) {
         'use strict';
 
         this.cancel = $mdDialog.cancel;
+        console.log(buys);
 
         function deleteDessert(dessert, index) {
-            var deferred = $nutrition.seller.remove({id: dessert.id, tableName: 'buys'});
+            var deferred = $nutrition.buy.remove({receipt_no: dessert.receipt_no, tableName: 'buys'});
 
             deferred.$promise.then(function () {
-                sellers.splice(index, 1);
+                buys.splice(index, 1);
             });
 
             return deferred.$promise;
@@ -78,7 +79,7 @@ MadrasaApp.controller('addBuyController', ['$nutrition', '$scope', 'Flash', func
         }
 
         function success() {
-            $q.all(sellers.forEach(deleteDessert)).then(onComplete);
+            $q.all(buys.forEach(deleteDessert)).then(onComplete);
         }
 
         this.authorizeUser = function () {
@@ -186,7 +187,7 @@ MadrasaApp.controller('addBuyController', ['$nutrition', '$scope', 'Flash', func
                 controllerAs: 'ctrl',
                 focusOnOpen: false,
                 targetEvent: event,
-                locals: {sellers: $scope.selected},
+                locals: {buys: $scope.selected},
                 templateUrl: 'views/templates/delete-dialog.html'
             }).then(getSellers);
         };

@@ -31,15 +31,15 @@
 
         <md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
             <div class="md-toolbar-tools" layout-align="space-between">
-                <!-- <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
+                <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
                 <md-button class="md-icon-button" ng-click="delete($event)">
                     <md-icon>delete</md-icon>
-                </md-button> -->
+                </md-button>
             </div>
         </md-toolbar>
 
         <md-table-container>
-            <table md-table ng-model="selected" md-progress="promise">
+            <table md-table md-row-select ng-model="selected" md-progress="promise">
                 <thead md-head md-order="query.order" md-on-reorder="onReorder">
                 <tr md-row>
                     <th md-column><span>{{'date' | translate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></th>
@@ -65,7 +65,7 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row ng-repeat="sale in sales">
+                <tr md-row md-select="sale" md-select-id="{{sale.receipt_no}}" md-auto-select ng-repeat="sale in sales">
                     <td md-cell>{{sale.transaction_data |  date:'d MMM,yy' }}</td>
                     <td md-cell>{{sale.receipt_no}}</td>
                     <td md-cell>{{sale.buyer_name}}</td>

@@ -5,7 +5,18 @@ if ($method == 'GET'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
     if(!empty($_GET['id'])){
         $id = !empty($_GET['id'])? $_GET['id'] : '';
-        $sql = "SELECT * FROM $table_name WHERE buyer_id=$id ORDER BY id";
+        $sql = "
+                    SELECT ex.transaction_data AS transaction_data,0 AS amount,ex.cash 
+                    from expenses AS ex where ex.buyer_id = $id
+                    UNION
+                    (
+                    select sa.transaction_data AS transaction_data,sa.amount AS amount,sa.cash 
+                    from sales AS sa
+                    where sa.buyer_id = $id
+                    ) 
+                    ORDER BY transaction_data;
+        ";
+        // $sql = "SELECT * FROM $table_name WHERE buyer_id=$id ORDER BY id";
 
         $result = $mysqli->query($sql);
         if ($result) {
@@ -69,7 +80,7 @@ if ($method == 'GET'){
                 SUM(IF(sector_id = 12, cash,0)) AS others, 
                 SUM(cash) AS total from
             (
-            SELECT ex.transaction_data, ex.sector_id as sector_id, ex.cash FROM `expenses_test` ex
+            SELECT ex.transaction_data, ex.sector_id as sector_id, ex.cash FROM `expenses` ex
             union
             SELECT sl.transaction_data, 1 as sector_id, sl.cash FROM sales sl
             ) t
@@ -120,7 +131,6 @@ if ($method == 'GET'){
 
     if ($mysqli->query($sql) === TRUE) {
         return true;
-//    return true;
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
