@@ -1,0 +1,41 @@
+<md-dialog edit-dialog>
+<md-dialog-content class="md-dialog-content">
+    <form name="seller.form" ng-submit="editSeller()" novalidate="novalidate">
+        <div class="form-group">
+            <div class="alert alert-danger text-center" ng-show="has_error">
+                <h3>There was a problem registering, please try again later!</h3>
+            </div>
+        </div>
+        <flash-message duration="5000"></flash-message>
+        <div class="row">
+            <div class="col-md-12 vertical-line">
+
+                <div class="form-group">
+                    <label for="account_no">{{'account_no' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.account_no"
+                           id="account_no"
+                           disabled="disabled">
+
+                </div>
+                <div class="form-group">
+                    <label for="name">{{'seller_name' | translate}}</label>
+
+                    <input type="text"
+                           class="form-control"
+                           ng-model="formModel.name"
+                           id="name"
+                           required="required">
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--<pre>{{ formModel | json }}</pre>-->
+<md-dialog-content class="md-dialog-content">
+    <md-dialog-actions>
+        <md-button class="md-primary" ng-click="editSeller()">Edit</md-button>
+        <md-button class="md-primary" ng-click="ctrl.cancel()">Close</md-button>
+    </md-dialog-actions>
+<md-dialog edit-dialog>
