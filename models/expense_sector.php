@@ -36,11 +36,16 @@ if ($method == 'GET'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
     $id = !empty($_GET['id'])? $_GET['id'] : '';
     $sql = "DELETE FROM $table_name WHERE id=$id";
+    $sql_expenses = "DELETE FROM expenses WHERE sector_id=$id";
 
     if ($mysqli->query($sql) === TRUE) {
-        echo "true";
+        if ($mysqli->query($sql_expenses) === TRUE) {
+            echo "true";
+        } else {
+            echo "Error deleting record: " . $mysqli->error.$sql_expenses;
+        }
     } else {
-        echo "Error deleting record: " . $mysqli->error;
+        echo "Error deleting record: " . $mysqli->error.$sql;
     }
 }elseif($method === 'POST'){
     // if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)){

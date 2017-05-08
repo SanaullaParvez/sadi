@@ -36,12 +36,28 @@ if ($method == 'GET'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
     $id = !empty($_GET['id'])? $_GET['id'] : '';
     $sql = "DELETE FROM $table_name WHERE id=$id";
+    $sql_buys = "DELETE FROM buys WHERE stone_id=$id";
+    $sql_sales = "DELETE FROM sales WHERE stone_id=$id";
 
     if ($mysqli->query($sql) === TRUE) {
-        echo "true";
+        if ($mysqli->query($sql_buys) === TRUE) {
+            if ($mysqli->query($sql_sales) === TRUE) {
+                echo "true";
+            } else {
+            echo "Error deleting record: " . $mysqli->error."SQL QUERY:".$sales_sql;
+            }
+        } else {
+        echo "Error deleting record: " . $mysqli->error."SQL QUERY:".$sql_buys;
+        }
     } else {
-        echo "Error deleting record: " . $mysqli->error;
+        echo "Error deleting record: " . $mysqli->error."SQL QUERY:".$sql_sales;
     }
+
+    // if ($mysqli->query($sql) === TRUE) {
+    //     echo "true";
+    // } else {
+    //     echo "Error deleting record: " . $mysqli->error;
+    // }
 }elseif($method === 'POST'){
     // if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)){
         $_POST = json_decode(file_get_contents('php://input'), true);
