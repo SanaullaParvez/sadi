@@ -15,13 +15,9 @@
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Help</a></li> -->
-        <li ng-class="{ active: isActive('/seller')}"><a ui-sref= "seller" >{{ 'SELLER' | translate }}</a></li>
-        <li ng-class="{ active: isActive('/new_seller')}"><a ui-sref= "new_seller" >{{ 'NEW_SELLER' | translate }}</a></li>
-                <li ng-class="{ active: isActive('/buyer')}"><a ui-sref= "buyer" >{{ 'BUYER' | translate }}</a></li>
-        <li ng-class="{ active: isActive('/new_buyer')}"><a ui-sref= "new_buyer" >{{ 'NEW_BUYER' | translate }}</a></li>
-                <li ng-class="{ active: isActive('/stone')}"><a ui-sref= "stone" >{{ 'STONE' | translate }}</a></li>
+        <li ng-class="{ active: isActive('/stone')}"><a ui-sref= "stone" >{{ 'STONE' | translate }}</a></li>
         <li ng-class="{ active: isActive('/new_stone')}"><a ui-sref= "new_stone" >{{ 'NEW_STONE' | translate }}</a></li>
-                <li ng-class="{ active: isActive('/expense_sector')}"><a ui-sref= "expense_sector" >{{ 'EXPENSE_SECTOR' | translate }}</a></li>
+        <li ng-class="{ active: isActive('/expense_sector')}"><a ui-sref= "expense_sector" >{{ 'EXPENSE_SECTOR' | translate }}</a></li>
         <li ng-class="{ active: isActive('/new_expense_sector')}"><a ui-sref= "new_expense_sector" >{{ 'NEW_EXPENSE_SECTOR' | translate }}</a></li>
             </ul>
         </div>

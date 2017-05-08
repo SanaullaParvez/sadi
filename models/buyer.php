@@ -35,12 +35,22 @@ if ($method == 'GET'){
 }elseif($method == 'DELETE'){
     $table_name = !empty($_GET["table_name"])? $_GET["table_name"] : $_GET["tableName"];
     $id = !empty($_GET['id'])? $_GET['id'] : '';
-    $sql = "DELETE FROM $table_name WHERE id=$id";
+    $buyers_sql = "DELETE FROM buyers WHERE id=$id";
+    $expenses_sql = "DELETE FROM expenses WHERE buyer_id=$id";
+    $sales_sql = "DELETE FROM sales WHERE buyer_id=$id";
 
-    if ($mysqli->query($sql) === TRUE) {
-        echo "true";
+    if ($mysqli->query($buyers_sql) === TRUE) {
+        if ($mysqli->query($expenses_sql) === TRUE) {
+            if ($mysqli->query($sales_sql) === TRUE) {
+                echo "true";
+            } else {
+            echo "Error deleting record: " . $mysqli->error."SQL QUERY:".$sales_sql;
+            }
+        } else {
+        echo "Error deleting record: " . $mysqli->error."SQL QUERY:".$expenses_sql;
+        }
     } else {
-        echo "Error deleting record: " . $mysqli->error;
+        echo "Error deleting record: " . $mysqli->error."SQL QUERY:".$buyers_sql;
     }
 }elseif($method === 'POST'){
     // if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)){
@@ -53,7 +63,7 @@ if ($method == 'GET'){
     $id = post("id");
     $name = post("name");
     $account_no = post("account_no");
-    if(!empty($id)){
+    if($id != "NULL"){
         // $id = !empty($_GET['id'])? $_GET['id'] : '';
         $sql = "UPDATE buyers SET `name`='{$name}'
             WHERE `account_no`='{$account_no}'";
@@ -67,7 +77,6 @@ if ($method == 'GET'){
 
     if ($mysqli->query($sql) === TRUE) {
         return true;
-//    return true;
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
