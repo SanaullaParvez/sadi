@@ -1,0 +1,23 @@
+
+<h2 class="sub-header">{{ 'income_expense' | translate }}: {{name}}</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><span>{{'date' | translate}}</span></th>
+            <th>{{'income' | translate}}</th>
+            <th>{{'expense' | translate}}</th>
+            <th>{{'total' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr data-ng-repeat="sale in expense" >
+            <td>{{sale.transaction_data}}</td>
+            <td>{{sale.income}}</td>
+            <td>{{sale.expense}}</td>
+            <td>{{sale.total}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

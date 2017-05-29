@@ -156,4 +156,28 @@ MadrasaApp.controller('addStudentController', ['$nutrition', '$scope', 'Flash', 
 
             getStudents();
         });
+    }])
+    .controller('incomeExpenseController', ['$nutrition', '$scope', '$q', '$stateParams', function ($nutrition, $scope, $q, $stateParams) {
+        'use strict';
+
+        console.log($stateParams);
+        $scope.promise = $nutrition.income_expense.get({}, success).$promise;
+        function error() {
+            $scope.error = 'Invalid secret.';
+        }
+        function success(expense) {
+            $scope.expense = [];
+            $scope.account_no = $stateParams.id;
+            $scope.name = $stateParams.name;
+            $scope.closing_balance = 0;
+            angular.forEach(expense.records, function(value, key) {
+                $scope.expense[key] = {};
+                $scope.expense[key]['transaction_data'] = value.transaction_data;
+                $scope.expense[key]['income'] = value.income;
+                $scope.expense[key]['expense'] = value.expense;
+                $scope.expense[key]['total'] = $scope.closing_balance*1 + value.income*1 - value.expense*1;
+                $scope.closing_balance = $scope.expense[key]['total'];
+            });
+        }
+
     }]);

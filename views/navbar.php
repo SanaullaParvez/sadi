@@ -17,6 +17,7 @@
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Help</a></li> -->
+                <li ng-class="{ active: isActive('/income_expense')}"><a ui-sref= "income_expense" >{{ 'income_expense' | translate }}</a></li>
                 <li ng-class="{ active: isActive('/stone')}"><a ui-sref= "stone" >{{ 'STONE' | translate }}</a></li>
                 <li ng-class="{ active: isActive('/new_stone')}"><a ui-sref= "new_stone" >{{ 'NEW_STONE' | translate }}</a></li>
                 <li ng-class="{ active: isActive('/expense_sector')}"><a ui-sref= "expense_sector" >{{ 'EXPENSE_SECTOR' | translate }}</a></li>

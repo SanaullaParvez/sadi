@@ -62,7 +62,7 @@ if ($method == 'GET'){
     $due = post("quantity") * post("rate") - post("cash");
 
     $sql = "INSERT INTO buys (`transaction_data`, `receipt_no`, `seller_id`, `stone_id`, `quantity`, `rate`, `amount`, `details`, `cash`, `due`)
-            VALUES ('{$transaction_data}', '{$receipt_no}', $seller_id, $stone_id, $quantity, $rate, $amount, '{$details}', $cash, $due)";
+            VALUES ('{$transaction_data}', '{$receipt_no}', $seller_id, $stone_id, $quantity, $rate, $amount, '{$details}', IFNULL($cash, 0), $due)";
     //$sql1 = "INSERT INTO incomes (`transaction_data`,`receipt_no`, `seller_id`, `cash`, `amount`)
     //        VALUES ('{$transaction_data}', $receipt_no, $seller_id, $cash, $amount)";
 

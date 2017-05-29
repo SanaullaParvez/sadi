@@ -69,6 +69,11 @@ MadrasaApp.config([
                 templateUrl: "views/student/form.html",
                 controller: 'addStudentController'
             })
+            .state('income_expense', {
+                url: "/income_expense",
+                templateUrl: "views/student/income_expense.html",
+                controller: 'incomeExpenseController'
+            })
             .state('incomes', {
                 url: "/incomes",
                 templateUrl: "views/incomes/index.html",
@@ -216,6 +221,9 @@ MadrasaApp.config([
             'peaeci': 'পেয়েছি ',
             'baki_paona': 'বাকি পাওনা',
 
+            'income': 'আয়',
+            'expense': 'ব্যয়',
+            'income_expense': 'আয় - ব্যয়',
             'SALE': 'ক্রয় মালের হিসাব',
             'BUY': 'বিক্রয় মালের হিসাব',
             'NEW_SALE': 'নতুন ক্রয়',
@@ -352,7 +360,8 @@ MadrasaApp.factory('$nutrition', ['$resource', function ($resource) {
         sale: $resource('models/sale.php'),
         seller: $resource('models/seller.php'),
         stone: $resource('models/stone.php'),
-        students: $resource('models/student.php')
+        students: $resource('models/student.php'),
+        income_expense: $resource('models/income_expense.php'),
     };
 }]);
 MadrasaApp.factory('$authorize', ['$resource', function ($resource) {
