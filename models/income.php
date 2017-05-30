@@ -48,13 +48,13 @@ if ($method == 'GET'){
         // $sql = "SELECT incomes.id AS id,receipt_no,transaction_data,sellers.name AS seller_name, amount, cash FROM ($table_name) INNER JOIN sellers ON sellers.account_no = incomes.seller_id WHERE transaction_data LIKE '$filter' ORDER BY $order DESC LIMIT $page, $limit";
         $sql = "SELECT ic.receipt_no,ic.transaction_data,sellers.name AS seller_name,ic.cash 
             from incomes ic 
-            inner join sellers on sellers.id = ic.seller_id 
+            inner join sellers on sellers.account_no = ic.seller_id 
             WHERE transaction_data LIKE '$filter'
             union 
             (
                 SELECT bu.receipt_no,bu.transaction_data,sellers.name AS seller_name,bu.cash 
                 from buys bu
-                inner join sellers on sellers.id = bu.seller_id
+                inner join sellers on sellers.account_no = bu.seller_id
                 WHERE transaction_data LIKE '$filter'
             ) ORDER BY $order DESC LIMIT $page, $limit;
         ";

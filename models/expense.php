@@ -65,7 +65,7 @@ if ($method == 'GET'){
     SUM(cash) AS total FROM `expenses` WHERE transaction_data LIKE '$filter' GROUP BY transaction_data ORDER BY $order DESC LIMIT $page, $limit";
 */
     $sql = "
-            SELECT transaction_data, sector_id,  
+            SELECT transaction_data,   
                 SUM(IF(sector_id = 1, cash,0)) AS stone,
                 SUM(IF(sector_id = 2, cash,0)) AS tomtom, 
                 SUM(IF(sector_id = 3, cash,0)) AS mistri,
